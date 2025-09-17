@@ -17,11 +17,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
       where (:name is null or lower(p.name) like lower(concat('%', cast(:name as string), '%')))
         and (:currency is null or p.currency = :currency)
         and (:active is null or p.active = :active)
+        and (:client is null or p.client = :client)
       """)
   Page<Product> search(@Param("name") String name,
-      @Param("currency") String currency,
-      @Param("active") Boolean active,
-      Pageable pageable);
+                       @Param("currency") String currency,
+                       @Param("active") Boolean active,
+                       @Param("client") String client,
+                       Pageable pageable);
 
   Optional<Product> findByIdAndActiveTrue(Long id);
 

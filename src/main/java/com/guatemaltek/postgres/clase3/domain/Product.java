@@ -42,6 +42,9 @@ public class Product {
   @Column(nullable = false)
   private Boolean active;
 
+  @Column(nullable = false)
+  private String client;
+
   @Column(nullable = false, updatable = false)
   private OffsetDateTime createdAt;
 

@@ -14,6 +14,7 @@ public final class ProductMapper {
         .price(dto.price())
         .currency(dto.currency().toUpperCase())
         .active(dto.active())
+            .client(dto.client())
         .build();
   }
 
@@ -22,10 +23,11 @@ public final class ProductMapper {
     entity.setPrice(dto.price());
     entity.setCurrency(dto.currency().toUpperCase());
     entity.setActive(dto.active());
+    entity.setClient(dto.client());
   }
 
   public static ProductResponse toResponse(Product p) {
     return new ProductResponse(p.getId(), p.getName(), p.getPrice(), p.getCurrency(),
-        p.getActive(), p.getCreatedAt(), p.getUpdatedAt());
+        p.getActive(), p.getClient(), p.getCreatedAt(), p.getUpdatedAt());
   }
 }

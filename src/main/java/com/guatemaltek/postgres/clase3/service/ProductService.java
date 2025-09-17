@@ -22,11 +22,12 @@ public class ProductService {
     this.repo = repo;
   }
 
-  public Page<ProductResponse> search(String name, String currency, Boolean active,
+  public Page<ProductResponse> search(String name, String currency, Boolean active, String client,
       Pageable pageable) {
     var normalizedName = Texts.blankToNull(name);
     var normalizedCurrency = Texts.blankToNull(currency);
-    var page = repo.search(normalizedName, normalizedCurrency, active, pageable);
+    var normalizedClient = Texts.blankToNull(client);
+    var page = repo.search(normalizedName, normalizedCurrency, active, normalizedClient, pageable);
     return page.map(ProductMapper::toResponse);
   }
 

@@ -4,7 +4,7 @@ server:
 spring:
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/appdb
+    url: jdbc:postgresql://localhost:5433/appdb
     username: appuser
     password: secret123
     hikari:
@@ -19,4 +19,4 @@ spring:
       hibernate:
         format_sql: true
         jdbc.time_zone: UTC
-        hibernate.default_schema: public
+        default_schema: public

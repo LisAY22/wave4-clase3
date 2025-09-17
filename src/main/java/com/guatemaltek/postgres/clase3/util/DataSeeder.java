@@ -18,6 +18,7 @@ public class DataSeeder {
 
   private static final String API_URL = "http://localhost:8090/api/products";
   private static final List<String> CURRENCIES = List.of("USD", "GTQ", "MXN", "EUR");
+  private static final List<String> CLIENTS = List.of("ELISA", "YANIRA", "ANGEL", "MARTHA", "CLAUDIO");
 
   @Bean
   CommandLineRunner seedProducts() {
@@ -31,7 +32,8 @@ public class DataSeeder {
             "Product-" + UUID.randomUUID().toString().substring(0, 8),
             BigDecimal.valueOf(1 + (10_000 - 1) * random.nextDouble()).setScale(2, BigDecimal.ROUND_HALF_UP),
             CURRENCIES.get(random.nextInt(CURRENCIES.size())),
-            random.nextBoolean()
+            random.nextBoolean(),
+                CLIENTS.get(random.nextInt(CLIENTS.size()))
         );
 
         HttpHeaders headers = new HttpHeaders();
@@ -55,5 +57,5 @@ public class DataSeeder {
   }
 
   // DTO interno solo para la request
-  record ProductRequest(String name, BigDecimal price, String currency, Boolean active) {}
+  record ProductRequest(String name, BigDecimal price, String currency, Boolean active, String client) {}
 }
