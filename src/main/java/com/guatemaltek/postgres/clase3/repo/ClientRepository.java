@@ -15,9 +15,9 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     @Query("""
     SELECT c FROM Client c
-    WHERE (:name IS NULL OR LOWER(c.name) LIKE LOWER(CONCAT('%', :name, '%')))
-      AND (:address IS NULL OR LOWER(c.address) LIKE LOWER(CONCAT('%', :address, '%')))
-      AND (:phone IS NULL OR c.phone LIKE CONCAT('%', :phone, '%'))
+    WHERE (:name IS NULL OR c.name LIKE %:name%)
+      AND (:address IS NULL OR c.address LIKE %:address%)
+      AND (:phone IS NULL OR c.phone LIKE %:phone%)
       AND (:active IS NULL OR c.active = :active)
     """)
     Page<Client> search(

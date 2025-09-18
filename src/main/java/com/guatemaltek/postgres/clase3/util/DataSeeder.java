@@ -81,7 +81,7 @@ public class DataSeeder {
         HttpEntity<String> request = new HttpEntity<>(mapper.writeValueAsString(client), headers);
 
         try {
-          rest.postForEntity(API_URL, request, String.class);
+          rest.postForEntity(API_URL_2, request, String.class);
         } catch (Exception ex) {
           System.err.println("Error on record " + i + ": " + ex.getMessage());
         }
