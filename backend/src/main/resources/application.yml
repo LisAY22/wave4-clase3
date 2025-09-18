@@ -1,0 +1,21 @@
+server:
+  port: ${SERVER_PORT:8090}
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/appdb}
+    username: ${SPRING_DATASOURCE_USERNAME:appuser}
+    password: ${SPRING_DATASOURCE_PASSWORD:secret123}
+    hikari:
+      maximum-pool-size: ${SPRING_DATASOURCE_POOLSIZE_MAX:10}
+      minimum-idle: ${SPRING_DATASOURCE_POOLSIZE_MIN:2}
+      connection-timeout: ${SPRING_DATASOURCE_TIMEOUT:30000}
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_DDL_AUTO:update}
+    show-sql: ${SPRING_JPA_SHOW_SQL:true}
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc.time_zone: UTC
+        default_schema: ${SPRING_JPA_SCHEMA:public}

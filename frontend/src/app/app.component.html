@@ -1,0 +1,81 @@
+<div class="container">
+  <h1>Productos</h1>
+  <p class="badge">CRUD + Paginación (Angular → Nginx proxy → Spring Boot)</p>
+
+  <div *ngIf="error()" style="color:#b00; margin:8px 0">{{ error() }}</div>
+
+  <!-- FORM -->
+  <form class="inline" (ngSubmit)="submit()">
+    <strong>{{ editId == null ? 'Crear' : 'Editar' }}</strong>
+    <input placeholder="Nombre" [(ngModel)]="form.name" name="name" required />
+    <input placeholder="Precio" type="number" step="0.01" [(ngModel)]="form.price" name="price" required />
+    <select [(ngModel)]="form.currency" name="currency">
+      <option>USD</option><option>GTQ</option><option>MXN</option><option>EUR</option>
+    </select>
+    <select [(ngModel)]="form.active" name="active">
+      <option [ngValue]="true">Activo</option>
+      <option [ngValue]="false">Inactivo</option>
+    </select>
+    <button type="submit">{{ editId == null ? 'Crear' : 'Guardar' }}</button>
+    <button type="button" (click)="clearForm()" *ngIf="editId != null">Cancelar</button>
+  </form>
+
+  <!-- FILTROS -->
+  <div class="toolbar">
+    <input placeholder="Buscar nombre..." [(ngModel)]="name" (keyup.enter)="resetPageAndLoad()"/>
+    <select [(ngModel)]="currency" (change)="resetPageAndLoad()">
+      <option value="">(Moneda)</option>
+      <option>USD</option><option>GTQ</option><option>MXN</option><option>EUR</option>
+    </select>
+    <select [(ngModel)]="active" (change)="resetPageAndLoad()">
+      <option value="">(Estado)</option>
+      <option value="true">Activo</option>
+      <option value="false">Inactivo</option>
+    </select>
+    <select [(ngModel)]="size" (change)="resetPageAndLoad()">
+      <option [ngValue]="5">5</option>
+      <option [ngValue]="10">10</option>
+      <option [ngValue]="20">20</option>
+      <option [ngValue]="50">50</option>
+    </select>
+    <select [(ngModel)]="sort" (change)="resetPageAndLoad()">
+      <option value="createdAt,desc">Recientes</option>
+      <option value="price,asc">Precio ↑</option>
+      <option value="price,desc">Precio ↓</option>
+      <option value="name,asc">Nombre A-Z</option>
+      <option value="name,desc">Nombre Z-A</option>
+    </select>
+    <button (click)="resetPageAndLoad()">Filtrar</button>
+    <span *ngIf="loading()">Cargando...</span>
+  </div>
+
+  <!-- TABLA -->
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th><th>Nombre</th><th>Precio</th><th>Moneda</th><th>Activo</th><th>Creado</th><th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let p of products()">
+      <td>{{p.id}}</td>
+      <td>{{p.name}}</td>
+      <td>{{p.price | number:'1.2-2'}}</td>
+      <td>{{p.currency}}</td>
+      <td>{{p.active ? 'Sí' : 'No'}}</td>
+      <td>{{p.createdAt | date:'short'}}</td>
+      <td>
+        <button (click)="edit(p)">Editar</button>
+        <button (click)="remove(p)">Eliminar</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- PAGINACIÓN -->
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="first()">« Prev</button>
+    <span>Página {{page + 1}} / {{totalPages()}} ({{totalElements()}} ítems)</span>
+    <button (click)="nextPage()" [disabled]="last()">Next »</button>
+  </div>
+</div>

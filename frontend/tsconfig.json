@@ -1,0 +1,28 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": ["ES2022", "DOM"]
+  },
+  "build": {
+    "builder": "@angular-devkit/build-angular:application",
+    "options": {
+      "outputPath": "dist/clase3-frontend",
+      "index": "src/index.html",
+      "browser": "src/main.ts",
+      "tsConfig": "tsconfig.json",
+      "assets": [],
+      "styles": ["src/styles.css"],
+      "scripts": []
+    }
+  }
+}

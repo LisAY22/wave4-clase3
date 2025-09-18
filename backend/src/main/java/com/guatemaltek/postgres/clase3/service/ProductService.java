@@ -60,4 +60,6 @@ public class ProductService {
         .orElseThrow(() -> new NotFoundException("Product %d not found".formatted(id)));
     repo.delete(entity);
   }
+
+
 }
