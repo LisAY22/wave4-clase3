@@ -22,19 +22,18 @@ public class ProductService {
     this.repo = repo;
   }
 
-  public Page<ProductResponse> search(String name, String currency, Boolean active, String client,
-      Pageable pageable) {
+  public Page<ProductResponse> search(String name, String currency, Boolean active,
+                                      Pageable pageable) {
     var normalizedName = Texts.blankToNull(name);
     var normalizedCurrency = Texts.blankToNull(currency);
-    var normalizedClient = Texts.blankToNull(client);
-    var page = repo.search(normalizedName, normalizedCurrency, active, normalizedClient, pageable);
+    var page = repo.search(normalizedName, normalizedCurrency, active, pageable);
     return page.map(ProductMapper::toResponse);
   }
 
 
   public ProductResponse get(Long id) {
     var entity = repo.findById(id)
-        .orElseThrow(() -> new NotFoundException("Product %d not found".formatted(id)));
+            .orElseThrow(() -> new NotFoundException("Product %d not found".formatted(id)));
     return ProductMapper.toResponse(entity);
   }
 
@@ -50,7 +49,7 @@ public class ProductService {
 
   public ProductResponse update(Long id, ProductRequest req) {
     var entity = repo.findById(id)
-        .orElseThrow(() -> new NotFoundException("Product %d not found".formatted(id)));
+            .orElseThrow(() -> new NotFoundException("Product %d not found".formatted(id)));
     ProductMapper.updateEntity(entity, req);
     var saved = repo.save(entity);
     return ProductMapper.toResponse(saved);
@@ -58,7 +57,7 @@ public class ProductService {
 
   public void delete(Long id) {
     var entity = repo.findById(id)
-        .orElseThrow(() -> new NotFoundException("Product %d not found".formatted(id)));
+            .orElseThrow(() -> new NotFoundException("Product %d not found".formatted(id)));
     repo.delete(entity);
   }
 }

@@ -37,13 +37,10 @@ public class Product {
   private BigDecimal price;
 
   @Column(nullable = false, length = 32)
-  private String currency; 
+  private String currency;
 
   @Column(nullable = false)
   private Boolean active;
-
-  @Column(nullable = false)
-  private String client;
 
   @Column(nullable = false, updatable = false)
   private OffsetDateTime createdAt;

@@ -5,6 +5,6 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 public record ProductResponse(Long id, String name, BigDecimal price, String currency,
-                              Boolean active, String client, OffsetDateTime createdAt, OffsetDateTime updatedAt) {
+                              Boolean active, OffsetDateTime createdAt, OffsetDateTime updatedAt) {
 
 }

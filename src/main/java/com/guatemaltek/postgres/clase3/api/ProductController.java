@@ -35,11 +35,10 @@ public class ProductController {
 
   @GetMapping
   public Page<ProductResponse> search(@RequestParam(required = false) String name,
-      @RequestParam(required = false) String currency,
-      @RequestParam(required = false) Boolean active,
-      @RequestParam(required = false) String client,
-      @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
-    return service.search(name, currency, active, client, pageable);
+                                      @RequestParam(required = false) String currency,
+                                      @RequestParam(required = false) Boolean active,
+                                      @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable) {
+    return service.search(name, currency, active, pageable);
   }
 
   @GetMapping("/{id}")
